@@ -2,4 +2,5 @@
     <string name="app_name">MobileGit</string>
     <string name="project_name">Project Name</string>
     <string name="github_repository">GitHub repository</string>
+    <string name="check_your_internet_connection">No Internet!\n Please, check your Internet connection</string>
 </resources>
