@@ -4,13 +4,17 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.admin.mobilegit.R;
 import com.example.admin.mobilegit.data.Item;
 import com.nostra13.universalimageloader.core.ImageLoader;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
@@ -21,7 +25,7 @@ import butterknife.ButterKnife;
  * Created by Admin on 26.09.2017.
  */
 
-public class RepositoryAdapter extends BaseAdapter {
+public class RepositoryAdapter extends BaseAdapter implements AdapterView.OnItemClickListener {
     private Context context;
     private LayoutInflater layoutInflater;
     private ArrayList<Item> items;
@@ -34,13 +38,20 @@ public class RepositoryAdapter extends BaseAdapter {
         layoutInflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+    }
+
     static class ViewHolder {
         @BindView(R.id.img_profile)
         ImageView userImage;
         @BindView(R.id.tv_proj_name)
         TextView tvProjectName;
-        @BindView(R.id.tv_login)
-        TextView tvLogin;
+        @BindView(R.id.tv_location)
+        TextView tvLocation;
+        @BindView(R.id.tv_full_name)
+        TextView tvFullName;
 
         public ViewHolder(View view){
             ButterKnife.bind(this, view);
@@ -82,8 +93,11 @@ public class RepositoryAdapter extends BaseAdapter {
         String projectName = items.get(position).getName();
         viewHolder.tvProjectName.setText(projectName);
 
-        String login = items.get(position).getOwner().getLogin();
-        viewHolder.tvLogin.setText(login);
+        String htmlUrl = items.get(position).getHtml_url();
+        viewHolder.tvFullName.setText(htmlUrl);
+
+//        String login = items.get(position).getOwner().getLogin();
+//        viewHolder.tvLocation.setText(login);
 
         return view;
     }

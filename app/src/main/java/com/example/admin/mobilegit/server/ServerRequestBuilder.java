@@ -43,7 +43,11 @@ public class ServerRequestBuilder {
         call.enqueue(new Callback<ServerResponseData>() {
             @Override
             public void onResponse(Call<ServerResponseData> call, Response<ServerResponseData> response) {
-                serverResponseListener.onServerResponseReceived(response);
+                if(response.isSuccessful()){
+                    if(response.body() != null){
+                        serverResponseListener.onServerResponseReceived(response);
+                    }
+                }
             }
 
             @Override

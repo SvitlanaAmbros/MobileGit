@@ -13,13 +13,13 @@
         android:layout_marginTop="@dimen/image_item_margin_top_bottom"
         android:layout_marginBottom="@dimen/image_item_margin_top_bottom"/>
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginBottom="@dimen/image_item_margin_top_bottom"
         android:layout_marginStart="@dimen/text_item_margin_start"
-        android:orientation="vertical"
         android:layout_marginTop="@dimen/image_item_margin_top_bottom"
-        android:layout_marginBottom="@dimen/image_item_margin_top_bottom">
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/tv_proj_name"
@@ -31,11 +31,26 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/tv_login"
+            android:id="@+id/tv_location"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="TextView" />
-    </LinearLayout>
+            android:layout_centerVertical="true"
+            android:text="Menio Park, California"
+            android:textSize="@dimen/secondary_text_size" />
+
+        <TextView
+            android:id="@+id/tv_full_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:autoLink="web"
+            android:text="http://www.gitHub.com"
+            android:textSize="@dimen/location_text_size"
+            android:layout_below="@+id/tv_location"
+            android:scrollbars="horizontal"
+            android:maxLines="1"
+            android:ellipsize="end"/>
+    </RelativeLayout>
 
 
 </LinearLayout>

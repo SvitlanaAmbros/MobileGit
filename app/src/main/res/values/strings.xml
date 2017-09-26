@@ -4,4 +4,7 @@
     <string name="github_repository">GitHub repository</string>
     <string name="check_your_internet_connection">No Internet!\n Please, check your Internet connection</string>
     <string name="no_info">No information.\n Input necessary repository name.</string>
+    <string name="wifi_connection">WIFI is connected</string>
+    <string name="internet_connection">Interned is connected</string>
+    <string name="no_internet_connection">No Internet connection</string>
 </resources>
