@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="@dimen/image_item_margin_top_bottom"
+        android:layout_marginStart="@dimen/repository_info_margins"
+        android:layout_marginTop="@dimen/repository_info_margins"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_repository_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="repository"
+            android:textColor="@color/primaryText"
+            android:textSize="@dimen/secondary_text_size"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="about library"
+            android:textSize="@dimen/secondary_text_size"
+            android:layout_below="@+id/tv_repository_name"/>
+    </RelativeLayout>
+</LinearLayout>

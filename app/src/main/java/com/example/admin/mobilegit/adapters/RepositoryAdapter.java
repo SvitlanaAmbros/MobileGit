@@ -6,16 +6,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.admin.mobilegit.R;
 import com.example.admin.mobilegit.data.Item;
 import com.example.admin.mobilegit.listeners.FindCityListener;
+import com.example.admin.mobilegit.listeners.SearchingRepositoryDetailListener;
 import com.nostra13.universalimageloader.core.ImageLoader;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
@@ -26,37 +24,41 @@ import butterknife.ButterKnife;
  * Created by Admin on 26.09.2017.
  */
 
-public class RepositoryAdapter extends BaseAdapter implements AdapterView.OnItemClickListener {
+public class RepositoryAdapter extends BaseAdapter implements AdapterView.OnItemClickListener{
     private Context context;
     private LayoutInflater layoutInflater;
     private ArrayList<Item> items;
     private ImageLoader imageLoader;
     private FindCityListener findCityListener;
     private ArrayList<String> locations;
+    private SearchingRepositoryDetailListener searchingRepositoryDetailListener;
 
-    public RepositoryAdapter(Context context, ArrayList<Item> items, ImageLoader imageLoader,
-                             FindCityListener findCityListener ) {
+    public RepositoryAdapter(Context context, ArrayList<Item> items,
+                             ImageLoader imageLoader,
+                             FindCityListener findCityListener,
+                             SearchingRepositoryDetailListener searchingRepositoryDetailListener) {
         this.context = context;
         this.items = items;
         this.imageLoader = imageLoader;
         this.findCityListener = findCityListener;
+        this.searchingRepositoryDetailListener = searchingRepositoryDetailListener;
         layoutInflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
+        searchingRepositoryDetailListener.searchRepositoryDetail(items.get(position).getOwner().getLogin());
     }
 
     static class ViewHolder {
-        @BindView(R.id.img_profile)
-        ImageView userImage;
         @BindView(R.id.tv_proj_name)
-        TextView tvProjectName;
+        TextView tvProjName;
         @BindView(R.id.tv_location)
         TextView tvLocation;
         @BindView(R.id.tv_full_name)
         TextView tvFullName;
+        @BindView(R.id.img_profile)
+        ImageView imgProfile;
 
         public ViewHolder(View view){
             ButterKnife.bind(this, view);
@@ -92,21 +94,20 @@ public class RepositoryAdapter extends BaseAdapter implements AdapterView.OnItem
             viewHolder = (ViewHolder) view.getTag();
         }
 
+        String name = items.get(position).getName();
+        viewHolder.tvProjName.setText(name);
+
         findCityListener.findCity(items.get(position).getOwner().getLogin());
-
-        String image = items.get(position).getOwner().getAvatar_url();
-        imageLoader.displayImage(image, viewHolder.userImage);
-
-        String projectName = items.get(position).getName();
-        viewHolder.tvProjectName.setText(projectName);
-
-        if(position < locations.size()) {
+        if(position < locations.size()){
             String location = locations.get(position);
             viewHolder.tvLocation.setText(location);
         }
 
         String htmlUrl = items.get(position).getHtml_url();
         viewHolder.tvFullName.setText(htmlUrl);
+
+        String image1 = items.get(position).getOwner().getAvatar_url();
+        imageLoader.displayImage(image1, viewHolder.imgProfile);
 
         return view;
     }

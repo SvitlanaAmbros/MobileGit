@@ -1,6 +1,8 @@
 package com.example.admin.mobilegit.server;
 
+import com.example.admin.mobilegit.RepositoryDetail;
 import com.example.admin.mobilegit.data.InfoCityResponse;
+import com.example.admin.mobilegit.data.RepositoryDetailResponse;
 import com.example.admin.mobilegit.data.ServerResponseData;
 import com.example.admin.mobilegit.listeners.InfoCityResponseListener;
 import com.example.admin.mobilegit.listeners.ServerResponseListener;
@@ -25,6 +27,15 @@ public class ServerRequestBuilder {
     public ServerRequestBuilder(ServerResponseListener serverResponseListener, InfoCityResponseListener infoCityResponseListener) {
         this.serverResponseListener = serverResponseListener;
         this.infoCityResponseListener = infoCityResponseListener;
+        retrofit = new Retrofit.Builder()
+                .baseUrl(baseURL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        serverConnector = retrofit.create(ServerConnector.class);
+    }
+
+    public ServerRequestBuilder(ServerResponseListener serverResponseListener) {
+        this.serverResponseListener = serverResponseListener;
         retrofit = new Retrofit.Builder()
                 .baseUrl(baseURL)
                 .addConverterFactory(GsonConverterFactory.create())
@@ -69,6 +80,26 @@ public class ServerRequestBuilder {
             public void onFailure(Call<InfoCityResponse> call, Throwable t) {
 
             }
+        });
+    }
+
+    public void repositoryDetailInfoRequest(String repositoryName) {
+        Call<RepositoryDetailResponse> call = serverConnector.getRepositoryDetailInfo(repositoryName);
+        call.enqueue(new Callback<RepositoryDetailResponse>() {
+            @Override
+            public void onResponse(Call<RepositoryDetailResponse> call, Response<RepositoryDetailResponse> response) {
+                if (response.isSuccessful()) {
+                    if (response.body() != null) {
+                        serverResponseListener.onServerResponseReceived(response);
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<RepositoryDetailResponse> call, Throwable t) {
+                serverResponseListener.onServerError(t);
+            }
+
         });
     }
 }

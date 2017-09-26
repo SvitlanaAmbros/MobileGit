@@ -1,4 +1,4 @@
-package com.example.admin.mobilegit;
+package com.example.admin.mobilegit.view;
 
 import com.example.admin.mobilegit.data.ServerResponseData;
 
@@ -11,6 +11,6 @@ import retrofit2.Response;
 public interface MainView {
     void viewFlipperNoInfo();
     void viewFlipperShowList();
-    void setListRepositoryInfo(Response<ServerResponseData> serverResponse);
+    void setListRepositoryInfo(Response<?> serverResponse);
     void updateInfoWithCity(String city);
 }

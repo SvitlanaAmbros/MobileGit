@@ -10,4 +10,5 @@
     <dimen name="text_item_margin_start">40dp</dimen>
     <dimen name="image_size">100dp</dimen>
     <dimen name="lv_top_bottom_margin">15dp</dimen>
+    <dimen name="repository_info_margins">15dp</dimen>
 </resources>

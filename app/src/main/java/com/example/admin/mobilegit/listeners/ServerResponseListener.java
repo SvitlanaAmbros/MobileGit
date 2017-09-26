@@ -9,6 +9,6 @@ import retrofit2.Response;
  */
 
 public interface ServerResponseListener {
-    void onServerResponseReceived(Response<ServerResponseData> serverResponse);
+    void onServerResponseReceived(Response<?> serverResponse);
     void onServerError(Throwable t);
 }

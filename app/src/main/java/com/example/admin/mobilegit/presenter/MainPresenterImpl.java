@@ -1,5 +1,6 @@
-package com.example.admin.mobilegit;
+package com.example.admin.mobilegit.presenter;
 
+import com.example.admin.mobilegit.view.MainView;
 import com.example.admin.mobilegit.data.InfoCityResponse;
 import com.example.admin.mobilegit.data.ServerResponseData;
 import com.example.admin.mobilegit.listeners.InfoCityResponseListener;
@@ -32,7 +33,7 @@ public class MainPresenterImpl implements MainPresenter, ServerResponseListener,
     }
 
     @Override
-    public void onServerResponseReceived(Response<ServerResponseData> serverResponse) {
+    public void onServerResponseReceived(Response<?> serverResponse) {
         view.viewFlipperShowList();
         view.setListRepositoryInfo(serverResponse);
     }
@@ -46,4 +47,6 @@ public class MainPresenterImpl implements MainPresenter, ServerResponseListener,
     public void infoCityReseived(Response<InfoCityResponse> response) {
         view.updateInfoWithCity(response.body().getLocation());
     }
+
+
 }

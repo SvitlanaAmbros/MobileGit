@@ -15,7 +15,11 @@ import com.example.admin.mobilegit.adapters.RepositoryAdapter;
 import com.example.admin.mobilegit.data.ServerResponseData;
 import com.example.admin.mobilegit.listeners.FindCityListener;
 import com.example.admin.mobilegit.listeners.FindConnectionListener;
+import com.example.admin.mobilegit.listeners.SearchingRepositoryDetailListener;
+import com.example.admin.mobilegit.presenter.MainPresenter;
+import com.example.admin.mobilegit.presenter.MainPresenterImpl;
 import com.example.admin.mobilegit.receivers.NetworkReceiver;
+import com.example.admin.mobilegit.view.MainView;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
@@ -26,7 +30,7 @@ import butterknife.ButterKnife;
 import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener,
-        FindConnectionListener, MainView, FindCityListener{
+        FindConnectionListener, MainView, FindCityListener, SearchingRepositoryDetailListener {
     private MainPresenter mainPresenter;
     private ArrayList<String> locations = new ArrayList<>();
     private RepositoryAdapter repositoryAdapter;
@@ -56,8 +60,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         createNetworkReceiver();
     }
 
-
-    public void sendBroadcast(){
+    public void sendBroadcast() {
         Intent intent = new Intent();
         intent.setAction(App.getInstance().BROADCAST_ACTION);
         sendBroadcast(intent);
@@ -72,13 +75,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
-        if(firstInputing == true) {
+        if (firstInputing == true) {
             etProjectName.setText("");
             firstInputing = false;
         }
     }
 
-    public void setListenerForEditText(){
+    public void setListenerForEditText() {
         etProjectName.setOnClickListener(this);
 
         etProjectName.addTextChangedListener(new TextWatcher() {
@@ -89,7 +92,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (count >= 3){
+                if (count >= 3) {
                     sendBroadcast();
                     etProjectName.setTag(s);
                 }
@@ -129,22 +132,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     @Override
-    public void setListRepositoryInfo(Response<ServerResponseData> serverResponse) {
+    public void setListRepositoryInfo(Response<?> serverResponse) {
         ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(this).build();
         ImageLoader.getInstance().init(config);
 
-        repositoryAdapter = new RepositoryAdapter(this, serverResponse.body().getItems(),
-                ImageLoader.getInstance(), this);
+        ServerResponseData response = (ServerResponseData) serverResponse.body();
+        repositoryAdapter = new RepositoryAdapter(this, response.getItems(),
+                ImageLoader.getInstance(), this, this);
         repositoryAdapter.setLocations(locations);
         lvRepositoryList.setAdapter(repositoryAdapter);
         lvRepositoryList.setOnItemClickListener(repositoryAdapter);
     }
 
     @Override
-    public void updateInfoWithCity(String city) {;
+    public void updateInfoWithCity(String city) {
         repositoryAdapter.getLocations().add(city);
         repositoryAdapter.notifyDataSetChanged();
-
     }
 
     @Override
@@ -152,5 +155,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mainPresenter.makeCiteRequest(login);
     }
 
-
+    @Override
+    public void searchRepositoryDetail(String organization) {
+        Intent intent = new Intent(this, RepositoryDetail.class);
+        intent.putExtra("organization", organization);
+        startActivity(intent);
+    }
 }
