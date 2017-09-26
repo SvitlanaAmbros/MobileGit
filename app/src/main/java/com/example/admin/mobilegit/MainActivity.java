@@ -10,6 +10,8 @@ import android.widget.EditText;
 import android.widget.Toast;
 import android.widget.ViewFlipper;
 
+import com.example.admin.mobilegit.server.ServerRequestBuilder;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -28,7 +30,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         ButterKnife.bind(this);
 
         setListenerForEditText();
-        viewFlipper.showNext();
+        projectNameEditText.setCursorVisible(false);
     }
 
     @Override
@@ -47,8 +49,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (count > 3){
-                    Toast.makeText(getBaseContext(), "dfd", Toast.LENGTH_LONG).show();
+                if (count >= 3){
+                    ServerRequestBuilder serverRequestBuilder = new ServerRequestBuilder(getBaseContext());
+                    serverRequestBuilder.repositoryInfoRequest(projectNameEditText.getText().toString());
                 }
             }
 
