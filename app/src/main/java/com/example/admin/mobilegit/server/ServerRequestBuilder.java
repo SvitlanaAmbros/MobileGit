@@ -1,11 +1,8 @@
 package com.example.admin.mobilegit.server;
 
-import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.widget.Toast;
-
+import com.example.admin.mobilegit.data.InfoCityResponse;
 import com.example.admin.mobilegit.data.ServerResponseData;
+import com.example.admin.mobilegit.listeners.InfoCityResponseListener;
 import com.example.admin.mobilegit.listeners.ServerResponseListener;
 
 import retrofit2.Call;
@@ -22,29 +19,26 @@ public class ServerRequestBuilder {
     private String baseURL = "https://api.github.com/";
     private Retrofit retrofit;
     private static ServerConnector serverConnector;
-    private Context context;
     private ServerResponseListener serverResponseListener;
+    private InfoCityResponseListener infoCityResponseListener;
 
-    public ServerRequestBuilder(Context context, ServerResponseListener serverResponseListener) {
-        this.context = context;
+    public ServerRequestBuilder(ServerResponseListener serverResponseListener, InfoCityResponseListener infoCityResponseListener) {
         this.serverResponseListener = serverResponseListener;
-    }
-
-    public void repositoryInfoRequest(String repositoryName){
-
+        this.infoCityResponseListener = infoCityResponseListener;
         retrofit = new Retrofit.Builder()
                 .baseUrl(baseURL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
-
         serverConnector = retrofit.create(ServerConnector.class);
+    }
 
+    public void repositoryInfoRequest(String repositoryName) {
         Call<ServerResponseData> call = serverConnector.getRepositoryInfo(repositoryName);
         call.enqueue(new Callback<ServerResponseData>() {
             @Override
             public void onResponse(Call<ServerResponseData> call, Response<ServerResponseData> response) {
-                if(response.isSuccessful()){
-                    if(response.body() != null){
+                if (response.isSuccessful()) {
+                    if (response.body() != null) {
                         serverResponseListener.onServerResponseReceived(response);
                     }
                 }
@@ -55,6 +49,26 @@ public class ServerRequestBuilder {
                 serverResponseListener.onServerError(t);
             }
 
+        });
+    }
+
+    public void repositoryCityRequest(String login) {
+        Call<InfoCityResponse> call = serverConnector.getCityInfo(login);
+        call.enqueue(new Callback<InfoCityResponse>() {
+
+            @Override
+            public void onResponse(Call<InfoCityResponse> call, Response<InfoCityResponse> response) {
+                if (response.isSuccessful()) {
+                    if (response.body() != null) {
+                        infoCityResponseListener.infoCityReseived(response);
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<InfoCityResponse> call, Throwable t) {
+
+            }
         });
     }
 }

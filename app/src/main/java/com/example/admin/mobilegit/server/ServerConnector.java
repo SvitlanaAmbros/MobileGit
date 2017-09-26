@@ -1,9 +1,11 @@
 package com.example.admin.mobilegit.server;
 
+import com.example.admin.mobilegit.data.InfoCityResponse;
 import com.example.admin.mobilegit.data.ServerResponseData;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 /**
@@ -13,4 +15,7 @@ import retrofit2.http.Query;
 public interface ServerConnector {
     @GET("search/repositories")
     Call<ServerResponseData> getRepositoryInfo(@Query("q") String repositoryName);
+
+    @GET("orgs/{login}")
+    Call<InfoCityResponse> getCityInfo(@Path("login") String repositoryName);
 }

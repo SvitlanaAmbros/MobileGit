@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.example.admin.mobilegit.R;
 import com.example.admin.mobilegit.data.Item;
+import com.example.admin.mobilegit.listeners.FindCityListener;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import org.w3c.dom.Text;
@@ -30,11 +31,15 @@ public class RepositoryAdapter extends BaseAdapter implements AdapterView.OnItem
     private LayoutInflater layoutInflater;
     private ArrayList<Item> items;
     private ImageLoader imageLoader;
+    private FindCityListener findCityListener;
+    private ArrayList<String> locations;
 
-    public RepositoryAdapter(Context context, ArrayList<Item> items, ImageLoader imageLoader) {
+    public RepositoryAdapter(Context context, ArrayList<Item> items, ImageLoader imageLoader,
+                             FindCityListener findCityListener ) {
         this.context = context;
         this.items = items;
         this.imageLoader = imageLoader;
+        this.findCityListener = findCityListener;
         layoutInflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
@@ -87,18 +92,30 @@ public class RepositoryAdapter extends BaseAdapter implements AdapterView.OnItem
             viewHolder = (ViewHolder) view.getTag();
         }
 
+        findCityListener.findCity(items.get(position).getOwner().getLogin());
+
         String image = items.get(position).getOwner().getAvatar_url();
         imageLoader.displayImage(image, viewHolder.userImage);
 
         String projectName = items.get(position).getName();
         viewHolder.tvProjectName.setText(projectName);
 
+        if(position < locations.size()) {
+            String location = locations.get(position);
+            viewHolder.tvLocation.setText(location);
+        }
+
         String htmlUrl = items.get(position).getHtml_url();
         viewHolder.tvFullName.setText(htmlUrl);
 
-//        String login = items.get(position).getOwner().getLogin();
-//        viewHolder.tvLocation.setText(login);
-
         return view;
+    }
+
+    public ArrayList<String> getLocations() {
+        return locations;
+    }
+
+    public void setLocations(ArrayList<String> locations) {
+        this.locations = locations;
     }
 }
