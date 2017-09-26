@@ -20,21 +20,55 @@
                 android:layout_marginTop="105dp"
                 android:gravity="center_vertical"
                 android:text="@string/project_name"
-                android:textSize="@dimen/project_name_size"
+                android:textSize="@dimen/primary_text_size"
                 android:textStyle="bold" />
 
             <EditText
                 android:id="@+id/et_project_name"
+                android:text="@string/github_repository"
+                android:textColor="@color/colorGrey"
+                android:textSize="@dimen/inputed_repository_name_size"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/textView"
                 android:layout_centerHorizontal="true"
                 android:layout_marginEnd="@dimen/input_project_name_margins"
                 android:layout_marginStart="@dimen/input_project_name_margins"
-                android:layout_marginTop="23dp"
-                android:text="@string/github_repository"
-                android:textColor="@color/colorGrey" />
+                android:layout_marginTop="23dp" />
 
+            <ViewFlipper
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true"
+                android:id="@+id/viewFlipper">
+
+                <!--<TextView-->
+                    <!--android:id="@+id/no_info_message"-->
+                    <!--android:text="@string/no_info"-->
+                    <!--android:textSize="@dimen/message_text_size"-->
+                    <!--android:textStyle="italic"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_alignLeft="@+id/textView"-->
+                    <!--android:layout_alignStart="@+id/textView"-->
+                    <!--android:layout_below="@+id/viewFlipper"-->
+                    <!--android:layout_gravity="center_horizontal"-->
+                    <!--android:gravity="center_horizontal"-->
+                    <!--android:layout_marginEnd="@dimen/input_project_name_margins"-->
+                    <!--android:layout_marginStart="@dimen/input_project_name_margins"/>-->
+
+            </ViewFlipper>
+
+            <ListView
+                android:id="@+id/lv_repository_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/et_project_name"
+                android:layout_marginEnd="@dimen/input_project_name_margins"
+                android:layout_marginStart="@dimen/input_project_name_margins"
+                android:layout_marginTop="@dimen/lv_top_bottom_margin"
+                android:layout_marginBottom="@dimen/lv_top_bottom_margin"/>
         </RelativeLayout>
 
         <RelativeLayout

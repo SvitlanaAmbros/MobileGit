@@ -1,9 +1,12 @@
 package com.example.admin.mobilegit.server;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.widget.Toast;
 
 import com.example.admin.mobilegit.data.ServerResponseData;
+import com.example.admin.mobilegit.listeners.ServerResponseListener;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -20,9 +23,11 @@ public class ServerRequestBuilder {
     private Retrofit retrofit;
     private static ServerConnector serverConnector;
     private Context context;
+    private ServerResponseListener serverResponseListener;
 
-    public ServerRequestBuilder(Context context) {
+    public ServerRequestBuilder(Context context, ServerResponseListener serverResponseListener) {
         this.context = context;
+        this.serverResponseListener = serverResponseListener;
     }
 
     public void repositoryInfoRequest(String repositoryName){
@@ -38,12 +43,12 @@ public class ServerRequestBuilder {
         call.enqueue(new Callback<ServerResponseData>() {
             @Override
             public void onResponse(Call<ServerResponseData> call, Response<ServerResponseData> response) {
-                Toast.makeText(context, "Sucess!" + response.body().getItems().get(0).getName(), Toast.LENGTH_LONG).show();
+                serverResponseListener.onServerResponseReceived(response);
             }
 
             @Override
             public void onFailure(Call<ServerResponseData> call, Throwable t) {
-                Toast.makeText(context, "Failure!" + t.getMessage(), Toast.LENGTH_LONG).show();
+                serverResponseListener.onServerError(t);
             }
 
         });

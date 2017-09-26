@@ -3,4 +3,5 @@
     <string name="project_name">Project Name</string>
     <string name="github_repository">GitHub repository</string>
     <string name="check_your_internet_connection">No Internet!\n Please, check your Internet connection</string>
+    <string name="no_info">No information.\n Input necessary repository name.</string>
 </resources>

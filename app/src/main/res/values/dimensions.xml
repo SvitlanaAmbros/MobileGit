@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="project_name_size">20sp</dimen>
+    <dimen name="primary_text_size">25sp</dimen>
+    <dimen name="secondary_text_size">20sp</dimen>
+    <dimen name="inputed_repository_name_size">20sp</dimen>
+    <dimen name="message_text_size">18sp</dimen>
     <dimen name="input_project_name_margins">30dp</dimen>
+    <dimen name="image_item_margin_top_bottom">15dp</dimen>
+    <dimen name="text_item_margin_start">20dp</dimen>
+    <dimen name="image_size">90dp</dimen>
+    <dimen name="lv_top_bottom_margin">15dp</dimen>
 </resources>

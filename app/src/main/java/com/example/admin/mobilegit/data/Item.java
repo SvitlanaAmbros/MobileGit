@@ -6,6 +6,7 @@ package com.example.admin.mobilegit.data;
 
 public class Item {
     private String name;
+    private Owner owner;
 
     public String getName() {
         return name;
@@ -13,5 +14,13 @@ public class Item {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Owner getOwner() {
+        return owner;
+    }
+
+    public void setOwner(Owner owner) {
+        this.owner = owner;
     }
 }

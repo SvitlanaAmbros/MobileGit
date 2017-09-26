@@ -9,7 +9,6 @@ import java.util.ArrayList;
 public class ServerResponseData {
     private int total_count;
     private ArrayList<Item> items;
-    private Owner owner;
 
     public int getTotal_count() {
         return total_count;
@@ -26,4 +25,5 @@ public class ServerResponseData {
     public void setItems(ArrayList<Item> items) {
         this.items = items;
     }
+
 }
