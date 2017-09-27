@@ -7,6 +7,8 @@ import com.example.admin.mobilegit.server.ServerRequestBuilder;
 import com.example.admin.mobilegit.view.MainView;
 import com.example.admin.mobilegit.view.RepositoryDetailView;
 
+import java.util.List;
+
 import retrofit2.Response;
 
 /**
@@ -29,7 +31,7 @@ public class RepositoryDetaiIPresenterImpl implements RepositoryDetailPresenter,
 
     @Override
     public void onServerResponseReceived(Response<?> serverResponse) {
-        RepositoryDetailResponse body = (RepositoryDetailResponse) serverResponse.body();
+        List<RepositoryDetailResponse> body = (List<RepositoryDetailResponse>) serverResponse.body();
 
         view.viewFlipperShowChild(1);
         view.createListRepository(body);
@@ -38,5 +40,6 @@ public class RepositoryDetaiIPresenterImpl implements RepositoryDetailPresenter,
     @Override
     public void onServerError(Throwable t) {
         view.viewFlipperShowChild(2);
+
     }
 }

@@ -82,6 +82,7 @@ public class RepositoryAdapter extends BaseAdapter implements AdapterView.OnItem
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
+
         View view = convertView;
         ViewHolder viewHolder;
 
@@ -94,10 +95,11 @@ public class RepositoryAdapter extends BaseAdapter implements AdapterView.OnItem
             viewHolder = (ViewHolder) view.getTag();
         }
 
+        findCityListener.findCity(items.get(position).getOwner().getLogin());
+
         String name = items.get(position).getName();
         viewHolder.tvProjName.setText(name);
 
-        findCityListener.findCity(items.get(position).getOwner().getLogin());
         if(position < locations.size()){
             String location = locations.get(position);
             viewHolder.tvLocation.setText(location);

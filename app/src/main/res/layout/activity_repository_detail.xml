@@ -19,19 +19,19 @@
         android:layout_height="match_parent"
         android:id="@+id/viev_flipper">
 
-        <!--<RelativeLayout-->
-            <!--android:layout_height="match_parent"-->
-            <!--android:layout_width="match_parent">-->
+        <RelativeLayout
+            android:layout_height="match_parent"
+            android:layout_width="match_parent">
 
-            <!--<ProgressBar-->
-                <!--android:id="@+id/progressBar"-->
-                <!--style="?android:attr/progressBarStyle"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_centerHorizontal="true"-->
-                <!--android:layout_centerVertical="true"-->
-                <!--android:layout_weight="1" />-->
-        <!--</RelativeLayout>-->
+            <ProgressBar
+                android:id="@+id/progressBar"
+                style="?android:attr/progressBarStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:layout_weight="1" />
+        </RelativeLayout>
 
         <RelativeLayout
             android:layout_height="match_parent"
@@ -49,10 +49,13 @@
 
             <TextView
                 android:id="@+id/tv"
-                style="?android:attr/progressBarStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/primary_text_size"
+                android:text="@string/no_information"
+                android:gravity="center_horizontal"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
                 />
         </RelativeLayout>
     </ViewFlipper>

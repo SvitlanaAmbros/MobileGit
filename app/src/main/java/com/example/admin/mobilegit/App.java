@@ -14,6 +14,8 @@ public class App extends Application {
     public final static String BROADCAST_ACTION = "ru.networkreceiver.networkconnection";
     private static App instance;
     private String typeInternetConnection;
+    private String clientId = "e46e947bb613c7b66e8c";
+    private String clientSecret="336258e884bb1356482ca93b980237f0bd266dc4";
 
     private ArrayList<String> dataList;
 
@@ -48,5 +50,21 @@ public class App extends Application {
 
     public void setDataList(ArrayList<String> dataList) {
         this.dataList = dataList;
+    }
+
+    public String getClientId() {
+        return clientId;
+    }
+
+    public void setClientId(String clientId) {
+        this.clientId = clientId;
+    }
+
+    public String getClientSecret() {
+        return clientSecret;
+    }
+
+    public void setClientSecret(String clientSecret) {
+        this.clientSecret = clientSecret;
     }
 }

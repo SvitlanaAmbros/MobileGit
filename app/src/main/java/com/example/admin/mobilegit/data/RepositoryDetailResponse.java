@@ -7,13 +7,23 @@ import java.util.ArrayList;
  */
 
 public class RepositoryDetailResponse {
-    private ArrayList<ItemRepository> items;
+    private String name;
+    private String description;
 
-    public ArrayList<ItemRepository> getItems() {
-        return items;
+    public String getName() {
+        return name;
     }
 
-    public void setItems(ArrayList<ItemRepository> items) {
-        this.items = items;
+    public void setName(String name) {
+        this.name = name;
+    }
+
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

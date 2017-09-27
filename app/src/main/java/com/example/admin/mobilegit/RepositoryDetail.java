@@ -16,6 +16,8 @@ import com.example.admin.mobilegit.presenter.RepositoryDetailPresenter;
 import com.example.admin.mobilegit.view.RepositoryDetailView;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import butterknife.BindView;
@@ -25,6 +27,7 @@ public class RepositoryDetail extends AppCompatActivity implements RepositoryDet
     private RepositoryDetailPresenter repositoryDetailIPresenter;
 
     private AdapterRepositoryInfo adapterRepositoryInfo;
+    private String organization;
     @BindView(R.id.main_toolbar)
     Toolbar mainToolbar;
 
@@ -40,11 +43,11 @@ public class RepositoryDetail extends AppCompatActivity implements RepositoryDet
         setContentView(R.layout.activity_repository_detail);
         ButterKnife.bind(this);
 
-        String organization = getIntent().getStringExtra("organization");
+        organization = getIntent().getStringExtra("organization");
         Objects.requireNonNull(organization);
 
         createActionBar();
-//        viewFlipper.setDisplayedChild(0);
+        viewFlipper.setDisplayedChild(0);
 
         repositoryDetailIPresenter = new RepositoryDetaiIPresenterImpl(this);
         repositoryDetailIPresenter.makeServerRequest(organization);
@@ -64,15 +67,17 @@ public class RepositoryDetail extends AppCompatActivity implements RepositoryDet
     }
 
     @Override
-    public void createListRepository(RepositoryDetailResponse repositoryDetailResponse) {
-        adapterRepositoryInfo = new AdapterRepositoryInfo(this, repositoryDetailResponse.getItems());
+    public void createListRepository(List<RepositoryDetailResponse> repositoryDetailResponse) {
+        ArrayList<RepositoryDetailResponse> list = new ArrayList<>(repositoryDetailResponse);
+        adapterRepositoryInfo = new AdapterRepositoryInfo(this, list);
         listDetailRepo.setAdapter(adapterRepositoryInfo);
+
+        mainToolbar.setTitle(organization + " Repository (" + list.size() + ")");
     }
 
     @Override
     public void viewFlipperShowChild(int ind) {
         viewFlipper.setDisplayedChild(ind);
-        Toast.makeText(this, "!!", Toast.LENGTH_LONG).show();
     }
 
 

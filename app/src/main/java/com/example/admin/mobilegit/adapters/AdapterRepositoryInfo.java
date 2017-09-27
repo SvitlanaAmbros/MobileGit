@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.example.admin.mobilegit.R;
 import com.example.admin.mobilegit.data.ItemRepository;
+import com.example.admin.mobilegit.data.RepositoryDetailResponse;
 
 import java.util.ArrayList;
 
@@ -22,10 +23,10 @@ import butterknife.ButterKnife;
 public class AdapterRepositoryInfo extends BaseAdapter {
     private Context context;
     private LayoutInflater layoutInflater;
-    private ArrayList<ItemRepository> items;
+    private ArrayList<RepositoryDetailResponse> items;
+    private String name;
 
-
-    public AdapterRepositoryInfo(Context context, ArrayList<ItemRepository> items) {
+    public AdapterRepositoryInfo(Context context, ArrayList<RepositoryDetailResponse> items) {
         this.context = context;
         this.items = items;
         layoutInflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
