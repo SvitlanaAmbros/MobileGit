@@ -14,8 +14,8 @@ public class App extends Application {
     public final static String BROADCAST_ACTION = "ru.networkreceiver.networkconnection";
     private static App instance;
     private String typeInternetConnection;
-    private String clientId = "e46e947bb613c7b66e8c";
-    private String clientSecret="336258e884bb1356482ca93b980237f0bd266dc4";
+    private String clientId = "723d2cebdbb52597547d";
+    private String clientSecret="0d65deae7aa06244579f99fd54842ab83ff7a50c";
 
     private ArrayList<String> dataList;
 

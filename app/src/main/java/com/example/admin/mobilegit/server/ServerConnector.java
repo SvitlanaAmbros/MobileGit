@@ -20,16 +20,10 @@ public interface ServerConnector {
     @GET("search/repositories")
     Call<ServerResponseData> getRepositoryInfo(@Query("q") String repositoryName);
 
-    @GET("orgs/{login}")
-    Call<InfoCityResponse> getCityInfo(@Path("login") String repositoryName,
-                                       @Query("client_id") String clientId,
-                                       @Query("client_secret") String clientSecret);
+    @GET("orgs/{login}?client_id=723d2cebdbb52597547d&client_secret=0d65deae7aa06244579f99fd54842ab83ff7a50c")
+    Call<InfoCityResponse> getCityInfo(@Path("login") String repositoryName);
 
-//    @GET("users/{login}/repos?client_id=e46e947bb613c7b66e8c&client_secret=336258e884bb1356482ca93b980237f0bd266dc4")
-//    Call<List<RepositoryDetailResponse>> getRepositoryDetailInfo(@Path("login") String repositoryName);
+    @GET("users/{login}/repos?client_id=723d2cebdbb52597547d&client_secret=0d65deae7aa06244579f99fd54842ab83ff7a50c")
+    Call<List<RepositoryDetailResponse>> getRepositoryDetailInfo(@Path("login") String repositoryName);
 
-    @GET("users/{login}/repos")
-    Call<List<RepositoryDetailResponse>> getRepositoryDetailInfo(@Path("login") String repositoryName,
-                                                                 @Query("client_id") String clientId,
-                                                                 @Query("client_secret") String clientSecret);
 }

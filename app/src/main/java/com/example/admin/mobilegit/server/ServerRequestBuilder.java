@@ -67,8 +67,7 @@ public class ServerRequestBuilder {
     }
 
     public void repositoryCityRequest(String login) {
-        Call<InfoCityResponse> call = serverConnector.getCityInfo(login,
-                App.getInstance().getClientId(), App.getInstance().getClientSecret());
+        Call<InfoCityResponse> call = serverConnector.getCityInfo(login);
         call.enqueue(new Callback<InfoCityResponse>() {
 
             @Override
@@ -88,8 +87,7 @@ public class ServerRequestBuilder {
     }
 
     public void repositoryDetailInfoRequest(String repositoryName) {
-        Call<List<RepositoryDetailResponse>> call = serverConnector.getRepositoryDetailInfo(repositoryName,
-                App.getInstance().getClientId(), App.getInstance().getClientSecret());
+        Call<List<RepositoryDetailResponse>> call = serverConnector.getRepositoryDetailInfo(repositoryName);
         call.enqueue(new Callback<List<RepositoryDetailResponse>>() {
             @Override
             public void onResponse(Call<List<RepositoryDetailResponse>> call, Response<List<RepositoryDetailResponse>> response) {
